@@ -46,7 +46,7 @@ namespace advent_2024
             {
                 totalDiffs += Math.Abs(nums1[i] - nums2[i]);
             }
-            Console.WriteLine($"Day1: {totalDiffs}");
+            Console.WriteLine($"Day 1 part 1: {totalDiffs}");
 
             Dictionary<int, int> similarityMap = [];
             Dictionary<int, int> similarityMapTotals = [];
@@ -79,7 +79,7 @@ namespace advent_2024
                 totalSimilarity += similarity;
             }
 
-            Console.WriteLine($"Day2: {totalSimilarity}");
+            Console.WriteLine($"Day 1 part 2: {totalSimilarity}");
         }
     }
 }
