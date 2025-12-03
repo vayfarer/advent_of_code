@@ -40,8 +40,6 @@ for (let num of inputNums){
     if (val < 0 ){
         val = val + 100;
     }
-    console.log(`${num}: ${oldVal} to ${val}; ${revs}, ${ans2}`)
 }
-
 console.log(`Part 2: ${ans2}`);
 
