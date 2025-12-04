@@ -1,23 +1,58 @@
-import path
-import sys
+from utility import get_lines, input_arg_parse
 
 
-def input_arg_parse():
-    # setting path for reading input files
-    directory = path.Path(__file__).parent
-    sample_input = directory / "sample_input"
-    problem_input = directory / "input"
+def remove_rolls(rolls_dict):
+    """
+    rolls_dict is map of rolls indexed by (m, n) tuples of roll positions.
+    Returns the number of rolls which can and are removed.
+    Updates rolls_dict in place.
+    """
 
-    if len(sys.argv) == 2:
-        if '-sample' in sys.argv:
-            return sample_input
+    def grid_adjacents(m, n):
+        adj_out = []
+        adjacents = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+
+        for dm, dn in adjacents:
+            new_m = m + dm
+            new_n = n + dn
+            if (new_m, new_n) in rolls_dict:
+                adj_out.append((new_m, new_n))
+        return adj_out
+
+    for roll in rolls_dict:
+        for adj_roll in grid_adjacents(roll[0], roll[1]):
+            rolls_dict[adj_roll] += 1
+
+    removed_rolls = []
+    for roll in rolls_dict:
+        if rolls_dict[roll] < 4:
+            removed_rolls.append(roll)
         else:
-            print(f"'{sys.argv[1]}' not recognized.")
-    elif len(sys.argv) > 2:
-        print("Too many arguments. Use: python D03 [-sample]")
-    return problem_input
+            rolls_dict[roll] = 0
 
+    for roll in removed_rolls:
+        rolls_dict.pop(roll)
+
+    return len(removed_rolls)
 
 
 if __name__ == "__main__":
     print("AoC Day 04.")
+    input_file = input_arg_parse()
+    rolls_lines = get_lines(input_file)
+
+    rolls_dict = {}
+    for m, line in enumerate(rolls_lines):
+        for n, char in enumerate(line):
+            if char == '@':
+                rolls_dict[(m, n)] = 0
+    original_rolls = len(rolls_dict)
+    remove_rolls(rolls_dict)
+
+    ans1 = original_rolls - len(rolls_dict)
+    print(f"Part 1: {ans1}")
+
+    while remove_rolls(rolls_dict):
+        pass
+    ans2 = original_rolls - len(rolls_dict)
+    print(f"Part 2: {ans2}")

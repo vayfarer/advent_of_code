@@ -1,31 +1,4 @@
-import path
-import sys
-
-
-def input_arg_parse():
-    # setting path for reading input files
-    directory = path.Path(__file__).parent
-    sample_input = directory / "sample_input"
-    problem_input = directory / "input"
-
-    if len(sys.argv) == 2:
-        if '-sample' in sys.argv:
-            return sample_input
-        else:
-            print(f"'{sys.argv[1]}' not recognized.")
-    elif len(sys.argv) > 2:
-        print("Too many arguments. Use: python D03 [-sample]")
-    return problem_input
-
-def get_lines(file_path):
-    """Read input file"""
-    out = []
-    with open(file_path) as f:
-        line = f.readline().strip()
-        while line:
-            out.append(line)
-            line = f.readline().strip()
-    return out
+from utility import get_lines, input_arg_parse
 
 
 def biggest_joltage(battery_line, n_digits):
@@ -54,9 +27,7 @@ def biggest_joltage(battery_line, n_digits):
 
 if __name__ == "__main__":
     print("AoC Day 03.")
-
     input_file = input_arg_parse()
-
     lines = get_lines(input_file)
 
     ans1 = 0
