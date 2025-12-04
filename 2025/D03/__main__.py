@@ -4,22 +4,17 @@ from utility import get_lines, input_arg_parse
 def biggest_joltage(battery_line, n_digits):
     """Finds the biggest joltage with n_digits in the given battery_line, which is a string of digits."""
 
-    # Find the biggest digit, leaving room for the remaining digits.
+    # Find the leftmost biggest digit, leaving room for the remaining digits.
     dig = 0
     dig_i = 0
-    for i in range(len(battery_line) - (n_digits - 1)):
+    rem_digits = n_digits - 1
+    for i in range(len(battery_line) - rem_digits):
         dig_val = int(battery_line[i])
-        if dig_val == 9:
-            dig = 9
-            dig_i = i
-            break
-            # The left most 9 is the biggest possible
         if dig_val > dig:
             dig = dig_val
             dig_i = i
 
-    rem_digits = n_digits - 1
-    joltage = dig * 10 ** (n_digits - 1)
+    joltage = dig * 10 ** rem_digits
     if rem_digits > 0:
         joltage += biggest_joltage(battery_line[dig_i + 1:], rem_digits)
     return joltage
