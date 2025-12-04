@@ -20,7 +20,7 @@ def remove_rolls(rolls_dict):
         return adj_out
 
     for roll in rolls_dict:
-        for adj_roll in grid_adjacents(roll[0], roll[1]):
+        for adj_roll in grid_adjacents(*roll):
             rolls_dict[adj_roll] += 1
 
     removed_rolls = []
