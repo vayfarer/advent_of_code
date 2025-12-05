@@ -23,8 +23,5 @@ def get_lines(file_path):
     """Read input file. Outputs a list of stripped strings."""
     out = []
     with open(file_path) as f:
-        line = f.readline().strip()
-        while line:
-            out.append(line)
-            line = f.readline().strip()
+        out = f.read().splitlines()
     return out
