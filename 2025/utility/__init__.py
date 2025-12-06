@@ -22,6 +22,6 @@ def input_arg_parse():
 def get_lines(file_path):
     """Read input file. Outputs a list of stripped strings."""
     out = []
-    with open(file_path) as f:
+    with open(file_path, "r") as f:
         out = f.read().splitlines()
     return out
