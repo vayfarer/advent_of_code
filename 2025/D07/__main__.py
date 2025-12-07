@@ -10,8 +10,8 @@ if __name__ == "__main__":
     
     ans1 = 0
     tachyon_dict = {starting_tachyon_idx: 1}    # dict values are # of timelines.
-    for line_idx in range(2, len(lines), 2):    # Input data only has splits on even index lines.
-        for i in list(tachyon_dict.keys()): # Need to make list of keys b/c dict must not change size during for loop.
+    for line_idx in range(2, len(lines), 2):
+        for i in list(tachyon_dict.keys()): 
             if lines[line_idx][i] == "^":   # split!
                 ans1 += 1
                 timelines = tachyon_dict.pop(i)
