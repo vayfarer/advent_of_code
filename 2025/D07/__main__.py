@@ -2,7 +2,7 @@ from utility import get_lines, input_arg_parse
 
 
 if __name__ == "__main__":
-    print("AoC Day 06.")
+    print("AoC Day 07.")
     input_file = input_arg_parse()
     lines = get_lines(input_file)
     
