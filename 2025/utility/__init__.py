@@ -1,5 +1,6 @@
 import path
 import sys
+import time
 
 
 def input_arg_parse():
@@ -25,3 +26,15 @@ def get_lines(file_path):
     with open(file_path, "r") as f:
         out = f.read().splitlines()
     return out
+
+
+class TimePrinter:
+    def __init__(self):
+        self._start_time = time.perf_counter()
+
+    def print(self, msg, r = False):
+        elapsed_time = time.perf_counter() - self._start_time
+        if r:
+            print(f"\r{elapsed_time:05.1f}s: \t{msg}", flush=True)
+        else:
+            print(f"{elapsed_time:05.1}s: \t{msg}")
